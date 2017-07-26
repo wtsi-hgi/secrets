@@ -1,6 +1,6 @@
 # Secrets
 
-A command line based secret manager.
+A command line based secrets manager.
 
 ## Usage
 
@@ -86,7 +86,30 @@ The following dependencies are required:
 * [GnuPG](https://gnupg.org/)
 * [jq](https://stedolan.github.io/jq/)
 
-For clipboard support, the following dependencies are required:
+You will need at least one valid encryption and signing key.
+
+For clipboard support, the following dependencies are needed:
 
 * macOS: `pbcopy` and `pbpaste`
 * Linux: `xclip`
+
+## Why Not Just Use `pass`?
+
+<p align="center"><img alt="xkcd Standards" src="https://imgs.xkcd.com/comics/standards.png"></p>
+
+`secrets` was inspired by Jason A. Donenfeld's [`pass`](https://www.passwordstore.org/),
+but with several key differences:
+
+* Secrets are stored in a single database, so no metadata (from the
+  secret IDs, for instance) is leaked. [`pass-tomb`](https://github.com/roddhjav/pass-tomb)
+  provides a similar function for `pass`, but at the expense of
+  complexity.
+
+* `secrets` has a much simpler interface, yet it provides all the useful
+  functionality of `pass`.
+
+* No automatic Git integration, so you can use a VCS of your choice
+  and/or manage the version control of your database how you prefer (if
+  you wish).
+
+Think of `secrets` as `pass-lite`!
