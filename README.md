@@ -75,11 +75,18 @@ Options:
     --secrets FILE        Secrets file [~/.secrets]
 
 
-## Dependencies
+## Installation
+
+<!-- TODO -->
+
+### Dependencies
 
 The following dependencies are required:
 
 * [GnuPG](https://gnupg.org/)
 * [jq](https://stedolan.github.io/jq/)
 
-<!-- Clipboard support? -->
+For clipboard support, the following dependencies are required:
+
+* macOS: `pbcopy` and `pbpaste`
+* Linux: `xclip`
