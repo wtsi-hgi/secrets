@@ -53,6 +53,17 @@ Options:
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
 
+### `expose`
+
+    secrets expose [OPTIONS]
+
+Expose the list of all the available secret IDs.
+
+Options:
+
+    --secrets FILE        Secrets file [~/.secrets]
+    --with-date           Include the date the secret was told
+
 ### `forget`
 
     secrets tell [OPTIONS] SECRET_ID
