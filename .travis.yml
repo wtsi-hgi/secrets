@@ -6,7 +6,11 @@ before-install:
   - apt-get install -y software-properties-common
   - add-apt-repository -y ppa:schot/gawk ppa:jonathonf/backports
   - apt-get -qq update
-  - apt-get install -y gawk gnupg2 jq shunit2
+  - apt-get install -y gawk gnupg2 jq xvfb xclip shunit2
+
+before-script:
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 script:
   - ./test.sh
