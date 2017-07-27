@@ -3,7 +3,10 @@ sudo: false
 
 before-install:
   - apt-get -qq update
-  - apt-get install -y gnupg2 jq shunit2
+  - apt-get install -y software-properties-common
+  - add-apt-repository -y ppa:schot/gawk ppa:jonathonf/backports
+  - apt-get -qq update
+  - apt-get install -y gawk gnupg2 jq shunit2
 
 script:
   - ./test.sh
