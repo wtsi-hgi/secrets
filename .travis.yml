@@ -4,7 +4,8 @@ sudo: false
 before-install:
   - apt-get -qq update
   - apt-get install -y software-properties-common
-  - add-apt-repository -y ppa:schot/gawk ppa:jonathonf/backports
+  - add-apt-repository -y ppa:schot/gawk
+  - add-apt-repository -y ppa:jonathonf/backports
   - apt-get -qq update
   - apt-get install -y gawk gnupg2 jq xvfb xclip shunit2
 
