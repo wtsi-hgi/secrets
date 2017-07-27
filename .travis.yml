@@ -1,0 +1,9 @@
+dist: trusty
+sudo: false
+
+before-install:
+  - apt-get -qq update
+  - apt-get install -y gnupg2 jq shunit2
+
+script:
+  - ./test.sh

@@ -1,5 +1,7 @@
 # Secrets
 
+[![Build Status](https://travis-ci.org/wtsi-hgi/secrets.svg?branch=master)](https://travis-ci.org/wtsi-hgi/secrets)
+
 A command line based secrets manager.
 
 ## Usage
