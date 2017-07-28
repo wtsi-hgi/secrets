@@ -14,6 +14,7 @@ AWK="gawk"
 
 TEST_KEY_USERNAME="Testy McTestface"
 TEST_KEY_EMAIL="testy@mctestface.com"
+TEST_KEY_UID="${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>"
 TEST_KEY_PASSPHRASE="abc123"
 TEST_KEY_ID=""
 
@@ -57,10 +58,34 @@ test_secret_key_handling() {
   assertFalse "has_valid_secret_keys"
 
   TEST_KEY_ID="$(_gen_key)"
+  assertNotNull "${TEST_KEY_ID}"
 
   assertTrue "has_valid_secret_keys"
-  assertEquals "${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>" "$(key_uids sign)"
-  assertEquals "${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>" "$(key_uids encrypt)"
+
+  local signing_keys="$(keys_and_owners sign)"
+  local encryption_keys="$(keys_and_owners encrypt)"
+
+  assertEquals "${TEST_KEY_UID}" "$(echo "${signing_keys}" | cut -d: -f2)"
+  assertEquals "${TEST_KEY_UID}" "$(echo "${encryption_keys}" | cut -d: -f2)"
+  assertTrue "[[ \"$(echo "${signing_keys}" | cut -d: -f1)\" =~ ${TEST_KEY_ID}$ ]]"
+  assertTrue "[[ \"$(echo "${encryption_keys}" | cut -d: -f1)\" =~ ${TEST_KEY_ID}$ ]]"
+}
+
+test_initialise() {
+  initialise
+
+  assertEquals "gpg2" "${GPG}"
+  assertEquals "gawk" "${AWK}"
+
+  if [[ "$(uname -s)" =~ Linux|.*BSD|DragonFly ]] && [[ "${DISPLAY}" ]]; then
+    assertEquals "xclip -i" "${COPY}"
+    assertEquals "xclip -o" "${PASTE}"
+  fi
+
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    assertEquals "pbcopy" "${COPY}"
+    assertEquals "pbpaste" "${PASTE}"
+  fi
 }
 
 # Run tests
