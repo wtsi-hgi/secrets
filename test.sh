@@ -4,19 +4,30 @@
 # Author: Christopher Harrison <ch12@sanger.ac.uk>
 # Copyright (c) 2017 Genome Research Ltd.
 
+# This must be run with a clean GnuPG keyring!
+
+source ./secrets
+
+# Force GnuPG2 and Gnu Awk
+GPG="gpg2"
+AWK="gawk"
+
+TEST_KEY_USERNAME="Testy McTestface"
+TEST_KEY_EMAIL="testy@mctestface.com"
+TEST_KEY_PASSPHRASE="abc123"
 TEST_KEY_ID=""
 
 _gen_key() {
   # Create valid encryption and signing key
-  gpg2 --batch --gen-key <(cat <<-EOF
+  "${GPG}" --batch --gen-key <(cat <<-EOF
 	Key-Type: default
 	Key-Usage: sign
 	Subkey-Type: default
 	Subkey-Usage: encrypt
-	Name-Real: Testy McTestface
-	Name-Email: testy@mctestface.com
+	Name-Real: ${TEST_KEY_USERNAME}
+	Name-Email: ${TEST_KEY_EMAIL}
 	Expire-Date: 0
-	Passphrase: abc123
+	Passphrase: ${TEST_KEY_PASSPHRASE}
 	%commit
 	EOF
   ) 2>&1 | grep -Eo "key [A-F0-9]+" | cut -d" " -f2
@@ -41,16 +52,16 @@ test_has_dependencies() {
   assertFalse "has_dependencies ${bad_deps[*]}"
 }
 
-test_has_valid_secret_keys() {
-  # This should fail before any secret keys have been defined
+test_secret_key_handling() {
+  assertNull "$(secret_key_ids)"
   assertFalse "has_valid_secret_keys"
 
   TEST_KEY_ID="$(_gen_key)"
 
-  # Now we should be good to go
   assertTrue "has_valid_secret_keys"
+  assertEquals "${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>" "$(key_uids sign)"
+  assertEquals "${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>" "$(key_uids encrypt)"
 }
 
 # Run tests
-source ./secrets
 source "$(which shunit2)"
