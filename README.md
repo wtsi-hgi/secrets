@@ -76,6 +76,15 @@ Options:
 
     --secrets FILE        Secrets file [~/.secrets]
 
+### `audit`
+
+    secrets audit [OPTIONS]
+
+Check the validity of the audit log.
+
+Options:
+
+    --secrets FILE        Secrets file [~/.secrets]
 
 ## Installation
 
