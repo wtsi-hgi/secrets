@@ -76,16 +76,6 @@ Options:
 
     --secrets FILE        Secrets file [~/.secrets]
 
-### `audit`
-
-    secrets audit [OPTIONS]
-
-Check the validity of the audit log.
-
-Options:
-
-    --secrets FILE        Secrets file [~/.secrets]
-
 ## Installation
 
 <!-- TODO -->
@@ -96,6 +86,7 @@ The following dependencies are required:
 
 * [GnuPG](https://gnupg.org/)
 * [jq](https://stedolan.github.io/jq/)
+* A means to calculate SHA256 digests (either `sha256sum` or OpenSSL)
 
 You will need at least one valid encryption and signing key.
 
@@ -117,7 +108,10 @@ but with several key differences:
   complexity.
 
 * `secrets` has a much simpler interface, yet it provides all the useful
-  functionality of `pass`.
+  functionality of `pass`, plus a few neat tricks of its own.
+
+* The secrets database is structured as a self-validating blockchain
+  audit log, for additional security.
 
 * No automatic Git integration, so you can use a VCS of your choice
   and/or manage the version control of your database how you prefer (if
