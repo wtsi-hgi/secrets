@@ -85,7 +85,6 @@ Options:
 The following dependencies are required:
 
 * [GnuPG](https://gnupg.org/)
-* [jq](https://stedolan.github.io/jq/)
 * A means to calculate SHA256 digests (either `sha256sum` or OpenSSL)
 
 You will need at least one valid encryption and signing key.
