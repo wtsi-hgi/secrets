@@ -72,6 +72,11 @@ test_has_dependencies() {
   assertFalse "has_dependencies ${bad_deps[*]}"
 }
 
+test_escape() {
+  assertEquals "foo bar" "$(escape "foo bar")"
+  assertEquals "foo\\tbar" "$(escape "foo	bar")"
+}
+
 test_nonce() {
   for _ in {1..5}; do
     assertTrue "[[ \"$(nonce)\" =~ ^[a-f0-9]{64}$ ]]"
