@@ -44,6 +44,13 @@ _del_key() {
   gpg2 --batch --yes --delete-keys "${public_fpr}"
 }
 
+_mock() {
+  local stdin="$(cat -)"
+
+  echo "$*"        # Arguments on first line, get with `head -1`
+  echo "${stdin}"  # stdin otherwise, get with `sed 1d`
+}
+
 ## Tests
 
 test_stderr() {
@@ -120,6 +127,42 @@ test_secret_key_handling() {
   assertEquals "${TEST_KEY_UID}" "$(echo "${encryption_keys}" | cut -d: -f2)"
   assertTrue "[[ \"$(get_key sign)\" =~ ${test_key_id}$ ]]"
   assertTrue "[[ \"$(get_key encrypt)\" =~ ${test_key_id}$ ]]"
+
+  _del_key "${test_key_id}"
+}
+
+test_blockchain() {
+  # This is a pretty blunt instrument :P
+  local test_key_id="$(_gen_key)"
+  local full_key_id="$(get_key sign)"
+
+  assertTrue "(( \"${#BLOCKCHAIN[@]}\" == 0 ))"
+
+  add_genesis_block 2>/dev/null
+  add_block "foo" "bar" "quux" 2>/dev/null
+  add_block "xyzzy" "123" 2>/dev/null
+
+  assertTrue "(( \"${#BLOCKCHAIN[@]}\" == 3 ))"
+
+  assertTrue "validate_block -1"
+  assertTrue "validate_block 0"
+  assertTrue "validate_chain"
+
+  # We can't test writing and reading the blockchain without pinentry,
+  # at least with GnuPG 2, so instead we mock GnuPG calls :P
+  local _gpg="${GPG}"
+  GPG="_mock"
+
+  local output_file="blockchain"
+  local expected_args="--no-tty --yes --sign --local-user ${full_key_id} --encrypt --recipient ${full_key_id} --output ${output_file}"
+  local expected_contents="$(for block in "${BLOCKCHAIN[@]}"; do echo "${block}"; done)"
+
+  local output="$(write_blockchain "${output_file}")"
+  assertEquals "${expected_args}" "$(head -1 <<< "${output}")"
+  assertEquals "${expected_contents}" "$(sed 1d <<< "${output}")"
+
+  # Reset mock
+  GPG="${_gpg}"
 
   _del_key "${test_key_id}"
 }
