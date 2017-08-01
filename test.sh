@@ -72,9 +72,12 @@ test_has_dependencies() {
   assertFalse "has_dependencies ${bad_deps[*]}"
 }
 
-test_escape() {
-  assertEquals "foo bar" "$(escape "foo bar")"
-  assertEquals "foo\\tbar" "$(escape "foo	bar")"
+test_escaping() {
+  local -a to_test=("foo" "foo bar" "foo	bar")
+
+  for t in "${to_test[@]}"; do
+    assertEquals "${t}" "$(unescape "$(escape "${t}")")"
+  done
 }
 
 test_nonce() {
