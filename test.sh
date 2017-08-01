@@ -146,7 +146,6 @@ test_blockchain() {
 
   assertTrue "(( \"${#BLOCKCHAIN[@]}\" == 0 ))"
 
-  add_genesis_block 2>/dev/null
   add_block "foo" "bar" "quux" 2>/dev/null
   add_block "xyzzy" "123" 2>/dev/null
 
