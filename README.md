@@ -41,6 +41,17 @@ The default policy will generate a secret with 284 bits of entropy.
 If the secrets file has not yet been created, you will be prompted for
 your GnuPG encryption and signing key IDs.
 
+You mustn't supply more `--must-include` arguments than the `--length`,
+otherwise an error will be raised. Also note that the `--allowed` and
+`--must-include` classes may be mutually exclusive.
+
+**Warning** Specifying the secret in the command line is dangerous, as
+it will be preserved in your shell history. If you must do this, rather
+than generating a random password, then you're advised to add a layer of
+indirection. For example, in Bash:
+
+    secrets keep [OPTIONS] SECRET_ID "$(read -rsp "Secret: " X && echo "$X")"
+
 ### `tell`
 
     secrets tell [OPTIONS] SECRET_ID
