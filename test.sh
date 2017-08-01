@@ -80,6 +80,18 @@ test_escaping() {
   done
 }
 
+test_random_string() {
+  # Password generation relies on this
+  local password
+
+  for test_class in "a-z" "a-zA-Z" "a-zA-Z0-9" 'a-zA-Z0-9!?$%&=+_-'; do
+    for test_length in {10..20..2}; do
+      password="$(random_string "${test_length}" "${test_class}")"
+      assertEquals "${password}" "$(grep -Eo "^[${test_class}]{${test_length}}$" <<< "${password}")"
+    done
+  done
+}
+
 test_nonce() {
   for _ in {1..5}; do
     assertTrue "[[ \"$(nonce)\" =~ ^[a-f0-9]{64}$ ]]"
