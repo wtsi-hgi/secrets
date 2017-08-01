@@ -95,6 +95,7 @@ Options:
 
 The following dependencies are required:
 
+* Bash 4.2, or newer
 * [GnuPG](https://gnupg.org/)
 * A means to calculate SHA256 digests (either `sha256sum` or OpenSSL)
 
