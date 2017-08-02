@@ -75,7 +75,7 @@ Expose the list of all the available secret IDs.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
-    --with-date           Include the date the secret was told
+    --with-date           Include the date the secret was kept
 
 ### `forget`
 
