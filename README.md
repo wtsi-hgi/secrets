@@ -89,7 +89,7 @@ Options:
 
 ## Installation
 
-<!-- TODO -->
+Just copy or symlink `secrets` to somewhere in your `PATH`.
 
 ### Dependencies
 
@@ -97,7 +97,7 @@ The following dependencies are required:
 
 * Bash 4.2, or newer
 * [GnuPG](https://gnupg.org/)
-* A means to calculate SHA256 digests (either `sha256sum` or OpenSSL)
+* A means of calculating SHA256 digests (either `sha256sum` or OpenSSL)
 
 You will need at least one valid encryption and signing key.
 
@@ -105,6 +105,22 @@ For clipboard support, the following dependencies are needed:
 
 * macOS: `pbcopy` and `pbpaste`
 * Linux: `xclip`
+
+## Blockchain Maintenance
+
+Every time a secret is kept, told or forgotten, it is logged in the
+secrets blockchain. In time, this can cause the database to become large
+and unwieldy. Moreover, if you have a need to revoke the GnuPG keys with
+which you signed or encrypted your database, you'll face similar
+problems. To this end, you can transfer just the kept secrets from one
+blockchain to another with the following command:
+
+<!-- FIXME This command may not work if the secret IDs contain whitespace -->
+
+    secrets expose --secrets OLD_BLOCKCHAIN | \
+    xargs -n1 -I{} bash -c "secrets keep --secrets NEW_BLOCKCHAIN
+                                         '{}' \"\$(secrets tell --secrets OLD_BLOCKCHAIN '{}' 2>/dev/null)\"
+                                         >/dev/null"
 
 ## Why Not Just Use `pass`?
 
