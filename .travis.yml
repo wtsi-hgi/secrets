@@ -2,14 +2,14 @@ dist: trusty
 sudo: false
 
 before-install:
-  - apt-get -qq update
-  - apt-get install -y software-properties-common
-  # - add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse"
-  - add-apt-repository -y ppa:schot/gawk
-  - add-apt-repository -y ppa:jonathonf/backports
-  - apt-get -qq update
-  - apt-get install -y gawk gnupg2 xvfb xclip shunit2
-  # - apt-get -t trusty-backports install -y shellcheck
+  - sudo apt-get -qq update
+  - sudo apt-get install -y software-properties-common
+  # - sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse"
+  - sudo add-apt-repository -y ppa:schot/gawk
+  - sudo add-apt-repository -y ppa:jonathonf/backports
+  - sudo apt-get -qq update
+  - sudo apt-get install -y gawk gnupg2 xvfb xclip shunit2
+  # - sudo apt-get -t trusty-backports install -y shellcheck
 
 before-script:
   - export DISPLAY=':99.0'
