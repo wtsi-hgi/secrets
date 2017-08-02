@@ -9,9 +9,6 @@
 
 source ./secrets
 
-# NOTE For debugging only
-set +eu +o pipefail
-
 TEST_KEY_USERNAME="Testy McTestface"
 TEST_KEY_EMAIL="testy@mctestface.com"
 TEST_KEY_UID="${TEST_KEY_USERNAME} <${TEST_KEY_EMAIL}>"
