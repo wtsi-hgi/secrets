@@ -176,7 +176,7 @@ test_blockchain() {
   GPG="_mock"
 
   local output_file="blockchain"
-  local expected_args="--no-tty --yes --sign --local-user ${full_key_id} --encrypt --recipient ${full_key_id} --output ${output_file}"
+  local expected_args="--sign --local-user ${full_key_id} --encrypt --recipient ${full_key_id} --yes --output ${output_file}"
   local expected_contents="$(for block in "${BLOCKCHAIN[@]}"; do echo "${block}"; done)"
 
   local output="$(write_blockchain "${output_file}")"
