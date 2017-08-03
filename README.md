@@ -118,9 +118,17 @@ blockchain to another with the following command:
 <!-- FIXME This command may not work if the secret IDs contain whitespace -->
 
     secrets expose --secrets OLD_BLOCKCHAIN | \
+    tee >(wc -l | xargs -I{} echo "Transferring {} secrets..." >&2) | \
     xargs -n1 -I{} bash -c "secrets keep --secrets NEW_BLOCKCHAIN
                                          '{}' \"\$(secrets tell --secrets OLD_BLOCKCHAIN '{}' 2>/dev/null)\"
                                          >/dev/null"
+
+Note that this process will take some time to complete (O(n) on the
+number of secrets you have) and GnuPG may prompt you for various key
+passphrases, throughout. The status of the new blockchain calculation
+will be written to `stderr`; it is important that this is *not*
+redirected to `/dev/null`, in case `secrets` asks you to choose new
+encryption or signing keys.
 
 ## Why Not Just Use `pass`?
 
