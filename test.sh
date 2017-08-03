@@ -164,6 +164,12 @@ test_blockchain() {
   assertTrue "validate_block 0"
   assertTrue "validate_chain"
 
+  assertFalse "scan_blockchain_for_secrets"
+  add_block "keep" "foo" "abc123" 2>/dev/null
+  assertTrue "scan_blockchain_for_secrets foo"
+  add_block "forget" "foo" 2>/dev/null
+  assertFalse "scan_blockchain_for_secrets foo"
+
   # We can't test writing and reading the blockchain without pinentry,
   # at least with GnuPG 2, so instead we mock GnuPG calls :P
   local _gpg="${GPG}"
