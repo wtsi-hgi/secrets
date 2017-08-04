@@ -79,7 +79,7 @@ Options:
 
 ### `forget`
 
-    secrets tell [OPTIONS] SECRET_ID
+    secrets forget [OPTIONS] SECRET_ID
 
 Forget the secret with the identifier of `SECRET_ID`.
 
