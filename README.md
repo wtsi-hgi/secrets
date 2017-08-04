@@ -36,7 +36,7 @@ Options:
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
 
-The default policy will generate a secret with 284 bits of entropy.
+The default policy will generate a secret with over 98 bits of entropy.
 
 If the secrets file has not yet been created, you will be prompted for
 your GnuPG encryption and signing key IDs.
