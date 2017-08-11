@@ -20,8 +20,8 @@ details.
     secrets keep [OPTIONS] SECRET_ID [SECRET]
 
 Keep a secret with the identifier of `SECRET_ID`. The secret can be
-specified with the plaintext given in `SECRET`, or generated following
-the rule policy provided by the options.
+specified with the plaintext given in `SECRET`, read through `stdin`, or
+generated following the rule policy provided by the options.
 
 Options:
 
@@ -31,10 +31,10 @@ Options:
     --allowed CLASS       Class of allowed characters [a-zA-Z0-9!?$%&=+_-]
     --must-include CLASS  Class of characters that must be included (this
                           option can be provided multiple times)
-    --copy                Copy the generated secret to the clipboard, if
-                          supported, rather than outputting to stdout
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
+    --output              Write the secret to stdout, rather than to the
+                          clipboard
 
 The default policy will generate a secret with over 98 bits of entropy.
 
@@ -47,8 +47,8 @@ otherwise an error will be raised. Also note that the `--allowed` and
 
 **Warning** Specifying the secret in the command line is dangerous, as
 it will be preserved in your shell history. If you must do this, rather
-than generating a random password, then you're advised to add a layer of
-indirection. For example, in Bash:
+than generating a random password or reading from `stdin`, then you're
+advised to add a layer of indirection. For example, in Bash:
 
     secrets keep [OPTIONS] SECRET_ID "$(read -rsp "Secret: " X && echo "$X")"
 
@@ -61,10 +61,10 @@ Tell the secret with the identifier of `SECRET_ID`.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
-    --copy                Copy the secret to the clipboard, if supported,
-                          rather than outputting to stdout
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
+    --output              Write the secret to stdout, rather than to the
+                          clipboard
 
 ### `expose`
 
