@@ -50,7 +50,7 @@ it will be preserved in your shell history. If you must do this, rather
 than generating a random password or reading from `stdin`, then you're
 advised to add a layer of indirection. For example, in Bash:
 
-    secrets keep [OPTIONS] SECRET_ID "$(read -rsp "Secret: " X && echo "$X")"
+    secrets keep [OPTIONS] SECRET_ID "$(read -rsp "Secret: " X && echo -n "$X")"
 
 ### `tell`
 
