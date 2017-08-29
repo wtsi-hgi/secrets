@@ -96,7 +96,7 @@ Just copy or symlink `secrets` to somewhere in your `PATH`.
 The following dependencies are required:
 
 * Bash 4.2, or newer
-* [GnuPG](https://gnupg.org/) (tested with 1.4, 2.0 and 2.1)
+* [GnuPG](https://gnupg.org/) (tested with 1.4, 2.0, 2.1 and 2.2)
 * A means of calculating SHA256 digests (either `sha256sum` or OpenSSL)
 
 You will need at least one valid encryption and signing key. Note that,
