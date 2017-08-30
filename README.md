@@ -33,7 +33,7 @@ Options:
                           option can be provided multiple times)
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
-    --output              Write the secret to stdout, rather than to the
+    --reveal              Write the secret to stdout, rather than to the
                           clipboard
 
 The default policy will generate a secret with over 98 bits of entropy.
@@ -63,7 +63,7 @@ Options:
     --secrets FILE        Secrets file [~/.secrets]
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
-    --output              Write the secret to stdout, rather than to the
+    --reveal              Write the secret to stdout, rather than to the
                           clipboard
 
 ### `expose`
