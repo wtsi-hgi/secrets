@@ -26,6 +26,7 @@ generated following the rule policy provided by the options.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
+    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --force               Overwrite the secret if it already exists
     --length LENGTH       Length [16]
     --allowed CLASS       Class of allowed characters [a-zA-Z0-9!?$%&=+_-]
@@ -61,6 +62,7 @@ Tell the secret with the identifier of `SECRET_ID`.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
+    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
     --reveal              Write the secret to stdout, rather than to the
@@ -75,6 +77,7 @@ Expose the list of all the available secret IDs.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
+    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --with-date           Include the date the secret was kept
 
 ### `forget`
@@ -86,6 +89,7 @@ Forget the secret with the identifier of `SECRET_ID`.
 Options:
 
     --secrets FILE        Secrets file [~/.secrets]
+    --gpg FILE            Alternative GnuPG binary [auto-detected]
 
 ## Installation
 
