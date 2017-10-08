@@ -127,7 +127,7 @@ blockchain to another with the following command:
     secrets expose --secrets OLD_BLOCKCHAIN | \
     tee >(wc -l | xargs -I{} echo "Transferring {} secrets..." >&2) | \
     xargs -n1 -I{} bash -c "secrets keep --secrets NEW_BLOCKCHAIN
-                                         '{}' \"\$(secrets tell --secrets OLD_BLOCKCHAIN '{}' 2>/dev/null)\"
+                                         '{}' \"\$(secrets tell --secrets OLD_BLOCKCHAIN --reveal '{}' 2>/dev/null)\"
                                          >/dev/null"
 
 Note that this process will take some time to complete (O(n) on the
