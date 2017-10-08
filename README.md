@@ -13,6 +13,17 @@ A command line based secrets manager.
 The `-h` or `--help` option can be used against any subcommand for
 details.
 
+## Common Options
+
+The following options are common to all subcommands and can be placed
+anywhere within the command line arguments:
+
+    --secrets FILE        Secrets file [~/.secrets]
+    --gpg FILE            Alternative GnuPG binary [auto-detected]
+
+By default, the latest version of GnuPG within your path (i.e., binaries
+named `gpg` and `gpg2`) is used.
+
 ## Subcommands
 
 ### `keep`
@@ -25,8 +36,6 @@ generated following the rule policy provided by the options.
 
 Options:
 
-    --secrets FILE        Secrets file [~/.secrets]
-    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --force               Overwrite the secret if it already exists
     --length LENGTH       Length [16]
     --allowed CLASS       Class of allowed characters [a-zA-Z0-9!?$%&=+_-]
@@ -61,8 +70,6 @@ Tell the secret with the identifier of `SECRET_ID`.
 
 Options:
 
-    --secrets FILE        Secrets file [~/.secrets]
-    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --expire SECONDS      Delete the secret from the clipboard, if used,
                           after a time limit [30]
     --reveal              Write the secret to stdout, rather than to the
@@ -76,8 +83,6 @@ Expose the list of all the available secret IDs.
 
 Options:
 
-    --secrets FILE        Secrets file [~/.secrets]
-    --gpg FILE            Alternative GnuPG binary [auto-detected]
     --with-date           Include the date the secret was kept
 
 ### `forget`
@@ -85,11 +90,6 @@ Options:
     secrets forget [OPTIONS] SECRET_ID
 
 Forget the secret with the identifier of `SECRET_ID`.
-
-Options:
-
-    --secrets FILE        Secrets file [~/.secrets]
-    --gpg FILE            Alternative GnuPG binary [auto-detected]
 
 ## Installation
 
