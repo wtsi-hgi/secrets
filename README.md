@@ -137,6 +137,8 @@ will be written to `stderr`; it is important that this is *not*
 redirected to `/dev/null`, in case `secrets` asks you to choose new
 encryption or signing keys.
 
+*n.b., The term "blockchain" is used somewhat liberally!*
+
 ## Why Not Just Use `pass`?
 
 <p align="center"><img alt="xkcd Standards" src="https://imgs.xkcd.com/comics/standards.png"></p>
