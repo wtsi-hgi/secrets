@@ -62,6 +62,10 @@ advised to add a layer of indirection. For example, in Bash:
 
     secrets keep [OPTIONS] SECRET_ID "$(read -rsp "Secret: " X && echo -n "$X")"
 
+**Warning** You should not recycle secrets, even those that are no
+longer in use. You will be warned and advised to keep a different secret
+if any duplication is detected.
+
 ### `tell`
 
     secrets tell [OPTIONS] SECRET_ID
